@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+</head>
+<body style="background-color:#f0f8ff; font-family: Arial, sans-serif;">
+
+    <h1 style="text-align:center;">Registration</h1>
+
+    <form id="devops exp-1" action="succesful.html" method="get" onsubmit="return validateForm();" 
+          style="width:300px; margin:auto; background:#fff; padding:20px; border-radius:8px; box-shadow: 1px 1px 5px #ccc;">
+
+        <label for="firstname">First Name</label><br>
+        <input type="text" id="firstname" name="firstname" required style="width:100%; padding:6px; margin-bottom:12px;"><br>
+
+        <label for="lastname">Last Name</label><br>
+        <input type="text" id="lastname" name="lastname" required style="width:100%; padding:6px; margin-bottom:12px;"><br>
+
+        <label for="mobile">Mobile No</label><br>
+        <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" 
+               title="Enter a 10-digit mobile number" 
+               required style="width:100%; padding:6px; margin-bottom:12px;"><br>
+
+        <label for="email">Email Id</label><br>
+        <input type="email" id="email" name="email" required style="width:100%; padding:6px; margin-bottom:12px;"><br>
+
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password" required style="width:100%; padding:6px; margin-bottom:12px;"><br>
+
+        <label for="confirm_password">Confirm Password</label><br>
+        <input type="password" id="confirm_password" name="confirm_password" required style="width:100%; padding:6px; margin-bottom:12px;"><br>
+
+        <label for="dob">Date of Birth</label><br>
+        <input type="date" id="dob" name="dob" required style="width:100%; padding:6px; margin-bottom:12px;"><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" style="margin-left:15px;">
+        <label for="female">Female</label><br><br>
+
+        <label for="state">State</label><br>
+        <input type="text" id="state" name="state" required style="width:100%; padding:6px; margin-bottom:12px;"><br>
+
+        <label for="country">Country</label><br>
+        <input type="text" id="country" name="country" required style="width:100%; padding:6px; margin-bottom:12px;"><br>
+
+        <button type="submit" style="width:100%; padding:10px; background-color:#007bff; color:#fff; border:none; border-radius:5px; cursor:pointer;">
+            Submit
+        </button>
+
+    </form>
+
+    <script>
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const mobile = document.getElementById('mobile').value;
+            const email = document.getElementById('email').value;
+            const dob = document.getElementById('dob').value;
+
+            const mobilePattern = /^[0-9]{10}$/;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+
+            if (!mobilePattern.test(mobile)) {
+                alert("Please enter a valid 10-digit mobile number.");
+                return false;
+            }
+
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            // Check DOB and age >= 13
+            if (dob) {
+                const today = new Date();
+                const birthDate = new Date(dob);
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                if (age < 13) {
+                    alert("You must be at least 13 years old.");
+                    return false;
+                }
+            } else {
+                alert("Please enter your date of birth.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+</body>
+</html>
